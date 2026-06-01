@@ -1,0 +1,31 @@
+<section class="m-search-page">
+  <div class="m-page">
+    <p class="m-eyebrow">Search</p>
+    <h1>Search Mireani</h1>
+    <form class="m-search-page-form" action="{{ routes.search_url }}" method="get" role="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.8 18.1a7.3 7.3 0 1 1 0-14.6 7.3 7.3 0 0 1 0 14.6Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.2 16.2 4.1 4.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for personalized gifts" autofocus>
+      <button class="m-btn" type="submit">Search</button>
+    </form>
+
+    {% if search.performed %}
+      <div class="m-search-results">
+        {% if search.results_count > 0 %}
+          <h2>{{ search.results_count }} result{% if search.results_count != 1 %}s{% endif %}</h2>
+          <div class="m-search-grid">
+            {% for item in search.results %}
+              <a class="m-search-result-card" href="{{ item.url }}">
+                {% if item.object_type == 'product' and item.featured_media %}
+                  {{ item.featured_media | image_url: width: 500 | image_tag: loading: 'lazy', alt: item.title }}
+                {% endif %}
+                <div><h3>{{ item.title }}</h3><p>{{ item.content | strip_html | truncate: 120 }}</p></div>
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="m-empty-cart"><p>No results found. Try another keyword or browse our products.</p><a class="m-btn" href="/collections/all">Browse products</a></div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
