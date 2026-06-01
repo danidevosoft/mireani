@@ -1,0 +1,86 @@
+<section class="m-product">
+  <div class="m-page m-product__grid">
+    <div class="m-product__media">
+      <div class="m-product__media-frame">
+        {% if product.featured_media %}
+          {{ product.featured_media | image_url: width: 1400 | image_tag: loading: 'eager', alt: product.title }}
+        {% else %}
+          <div class="m-hero__poster">
+            <div>
+              <small>Our Story</small>
+              <strong>Marcus & Emily</strong>
+              <em>Since 14.08.2021</em>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="m-product__info">
+      <p class="m-eyebrow">Personalized keepsake</p>
+      <h1 class="m-product__title">{{ product.title }}</h1>
+      <div class="m-product__price">{{ product.selected_or_first_available_variant.price | money }}</div>
+
+      {% form 'product', product, enctype: 'multipart/form-data', class: 'm-product-form' %}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <div class="m-customizer">
+          <h2>Personalize your poster</h2>
+          <p>Upload a clear photo and enter the details exactly as you want them printed.</p>
+
+          <div class="m-field m-upload">
+            <label for="m-upload-photo">Upload your photo *</label>
+            <input id="m-upload-photo" type="file" name="properties[Uploaded photo]" accept="image/*" required>
+            <div class="m-note">Use a bright, clear photo. JPG or PNG is recommended.</div>
+          </div>
+
+          <div class="m-field">
+            <label for="m-name-1">Name 1 *</label>
+            <input id="m-name-1" class="m-input" type="text" name="properties[Name 1]" placeholder="Example: Marcus" required>
+          </div>
+
+          <div class="m-field">
+            <label for="m-name-2">Name 2</label>
+            <input id="m-name-2" class="m-input" type="text" name="properties[Name 2]" placeholder="Example: Emily">
+          </div>
+
+          <div class="m-field">
+            <label for="m-special-date">Special date</label>
+            <input id="m-special-date" class="m-input" type="text" name="properties[Special date]" placeholder="Example: 14.08.2021">
+          </div>
+
+          <div class="m-field">
+            <label for="m-style">Choose style *</label>
+            <select id="m-style" class="m-select" name="properties[Style]" required>
+              <option value="Minimal Portrait">Minimal Portrait</option>
+              <option value="Elegant Line Art">Elegant Line Art</option>
+              <option value="Watercolor Style">Watercolor Style</option>
+              <option value="Romantic Poster">Romantic Poster</option>
+            </select>
+          </div>
+
+          <div class="m-field">
+            <label for="m-message">Optional short message</label>
+            <textarea id="m-message" class="m-textarea" name="properties[Optional message]" placeholder="Example: A moment worth keeping"></textarea>
+          </div>
+        </div>
+
+        <button class="m-btn m-add" type="submit" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          {% if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif %}
+        </button>
+        {{ form | payment_button }}
+      {% endform %}
+
+      <div class="m-description">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": []
+}
+{% endschema %}
