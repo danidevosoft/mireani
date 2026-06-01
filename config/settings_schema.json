@@ -1,0 +1,18 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mireani",
+    "theme_version": "1.0.0",
+    "theme_author": "Mireani",
+    "theme_documentation_url": "https://mireani.com",
+    "theme_support_url": "https://mireani.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_background", "label": "Background", "default": "#ffffff" },
+      { "type": "color", "id": "color_text", "label": "Text", "default": "#151515" },
+      { "type": "color", "id": "color_accent", "label": "Accent", "default": "#111111" }
+    ]
+  }
+]
