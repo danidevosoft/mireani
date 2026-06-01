@@ -1,0 +1,18 @@
+<section class="m-section">
+  <div class="m-page">
+    <h1>{{ collection.title }}</h1>
+    <div class="m-product-grid">
+      {% for product in collection.products %}
+        <a class="m-product-card" href="{{ product.url }}">
+          <div class="m-product-card__image">
+            {% if product.featured_media %}{{ product.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', alt: product.title }}{% endif %}
+          </div>
+          <div class="m-product-card__info">
+            <h3>{{ product.title }}</h3>
+            <div class="m-price">{{ product.price | money }}</div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
