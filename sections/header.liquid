@@ -1,21 +1,18 @@
 <header class="m-header">
   <div class="m-page m-header__inner">
-    <a class="m-logo" href="{{ routes.root_url }}">Mireani</a>
+    <a class="m-logo m-logo-mark" href="{{ routes.root_url }}" aria-label="Mireani home">
+      <span class="m-logo-icon">M</span><span>Mireani</span>
+    </a>
     <nav class="m-nav" aria-label="Main navigation">
-      {% if section.settings.menu != blank %}
-        {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        {% endfor %}
-      {% else %}
-        <a href="{{ routes.root_url }}">Home</a>
-        <a href="/collections/personalized-gifts">Personalized Gifts</a>
-        <a href="/collections/couple-gifts">Couple Gifts</a>
-        <a href="/pages/contact">Contact</a>
-      {% endif %}
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="/collections/all">Products</a>
+      <a href="/pages/contact">Contact</a>
+      <a href="/pages/terms-and-conditions">Terms</a>
+      <a href="/pages/return-policy">Returns</a>
     </nav>
     <div class="m-header__icons">
       <a href="{{ routes.search_url }}">Search</a>
-      <a href="{{ routes.cart_url }}">Cart</a>
+      <a class="m-cart-pill" href="{{ routes.cart_url }}">Cart</a>
     </div>
   </div>
 </header>
@@ -23,8 +20,6 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu" }
-  ]
+  "settings": []
 }
 {% endschema %}
