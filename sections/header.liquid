@@ -1,0 +1,30 @@
+<header class="m-header">
+  <div class="m-page m-header__inner">
+    <a class="m-logo" href="{{ routes.root_url }}">Mireani</a>
+    <nav class="m-nav" aria-label="Main navigation">
+      {% if section.settings.menu != blank %}
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="/collections/personalized-gifts">Personalized Gifts</a>
+        <a href="/collections/couple-gifts">Couple Gifts</a>
+        <a href="/pages/contact">Contact</a>
+      {% endif %}
+    </nav>
+    <div class="m-header__icons">
+      <a href="{{ routes.search_url }}">Search</a>
+      <a href="{{ routes.cart_url }}">Cart</a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu" }
+  ]
+}
+{% endschema %}
