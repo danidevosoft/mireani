@@ -1,0 +1,28 @@
+<section class="m-page-hero">
+  <div class="m-page">
+    <p class="m-eyebrow">Contact</p>
+    <h1>Contact Mireani</h1>
+    <p>Send us a message about personalization, delivery or an existing order.</p>
+  </div>
+</section>
+
+<section class="m-section m-soft m-contact-section">
+  <div class="m-page m-contact-layout">
+    <div class="m-info-card">
+      <h2>Customer care</h2>
+      <p>Email: shop.mireani@gmail.com</p>
+      <p>We usually reply within 1 business day.</p>
+    </div>
+    <div class="m-contact-form-card">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}<p class="m-form-success">Thank you. Your message has been sent.</p>{% endif %}
+        {{ form.errors | default_errors }}
+        <div class="m-field"><label for="ContactName">Name</label><input class="m-input" id="ContactName" type="text" name="contact[name]" required></div>
+        <div class="m-field"><label for="ContactEmail">Email</label><input class="m-input" id="ContactEmail" type="email" name="contact[email]" required></div>
+        <div class="m-field"><label for="ContactTopic">Topic</label><select class="m-select" id="ContactTopic" name="contact[topic]"><option>Personalization</option><option>Delivery</option><option>Existing order</option><option>Other</option></select></div>
+        <div class="m-field"><label for="ContactMessage">Message</label><textarea class="m-textarea" id="ContactMessage" name="contact[body]" required></textarea></div>
+        <button class="m-btn" type="submit">Send message</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
